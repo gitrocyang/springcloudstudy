@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: eureka-client-provider
+server:
+  port: 8001
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://rocyang:12378456@localhost:8000/eureka/ #定义注册中心
+    healthcheck:
+      enabled: true
+  instance:
+    status-page-url-path: ${management.endpoints.web.base-path}/info #定义健康检查的页面地址
+    health-check-url-path: ${management.endpoints.web.base-path}/health #定义健康检查的页面地址
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
+    metadata-map:
+      author: rocyang
+
+management:
+  server:
+    port: 9001 #actuator的端口
+  endpoints:
+    web:
+      base-path: /status #定义actuator的路径
+  endpoint:
+    health:
+      show-details: always

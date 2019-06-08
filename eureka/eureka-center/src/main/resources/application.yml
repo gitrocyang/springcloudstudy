@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: single
+  application:
+    name: eureka-start-server
+  security:
+    user:
+      name: rocyang
+      password: 12378456
+
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${spring.application.instance_id:${server.port}}
+    prefer-ip-address: true
+  client:
+    register-with-eureka: false #本实例为中心，不向注册中心注册自己
+    fetch-registry: false #本实例不做检索服务
+  server:
+    enable-self-preservation: true #关闭自保护
+
